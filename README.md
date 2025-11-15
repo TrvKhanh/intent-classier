@@ -8,7 +8,12 @@ This project addresses the **user intent classification task** in an **e-commerc
 - **retrieval-phone**: Specific queries targeting the phone module  
 
 The model is fine-tuned from **Google FLAN-T5-small (77M parameters)** using **LoRA**, which reduces training cost while improving efficiency.
-
+```python
+# Input
+"Tôi muốn mua một chiêc iphone 16 promax shop tư vấn cho tôi đi."
+# Output for model
+'{"router": "retrieval-phone", "infor": "poco x7 pro"}'
+```
 ---
 
 ## Data Design
