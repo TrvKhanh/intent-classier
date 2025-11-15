@@ -17,7 +17,7 @@ The model is fine-tuned from **Google FLAN-T5-small (77M parameters)** using **L
 
 The dataset is stored in JSON format as follows:
 
-json
+```json
 {
   "input": "Bên mình có bán poco x7 pro k ạ",
   "output": {
@@ -25,6 +25,16 @@ json
     "infor": "poco x7 pro"
   }
 }
+```
+
+**Fields:**
+- `input`: User query/intent (Vietnamese text)
+- `output`: 
+  - `router`: Intent type
+    - `"chat"`: Social interaction, emotions, reviews
+    - `"retrieval"`: General information query
+    - `"retrieval-phone"`: Phone-specific queries
+  - `infor`: Extracted information from the query (brief summary)
 
 ### 2. Data Processing Pipeline
 
@@ -65,7 +75,7 @@ json
 # Output for model
 input_text: "classify: bên mình có bán poco x7 pro không ạ"
 target_text: '{"router": "retrieval-phone", "infor": "poco x7 pro"}'
-
+```
 
 ### 3. Data Statistics
 
@@ -120,6 +130,35 @@ Output: JSON string
 [Post-processing] → Parse JSON → Extract router & infor
 ```
 
+### 4. Training Configuration
+
+**Hyperparameters:**
+- **Epochs**: 3
+- **Batch size**: 8 (per device)
+- **Learning rate**: 2e-4
+- **LR Scheduler**: Cosine
+- **Warmup ratio**: 0.1
+- **Weight decay**: 0.01
+- **Optimizer**: AdamW
+
+**Training Strategy:**
+- **Train/Test split**: 80/20
+- **Evaluation**: Every epoch
+- **Saving**: Every epoch
+- **Logging**: WandB integration
+- **Metrics tracking**:
+  - JSON valid prediction ratio
+  - Exact match ratio
+
+### 5. Custom Trainer
+
+The `train.py` file uses `CustomSeq2SeqTrainer` to:
+- Handle inputs incompatible with model signature
+- Filter inputs according to model's forward signature
+- Handle label smoothing (if enabled)
+
+---
+
 ## Directory Structure
 
 ```
@@ -129,7 +168,7 @@ fine-tune-intent/
 ├── abbreviations.json        # Abbreviation → full word mapping
 │
 ├── data.json                 # Raw data (not cleaned)
-├── data_train.json          # Cleaned data
+├── data_train.json          # Cleaned data (auto-generated)
 │
 ├── clean_text.py            # Text cleaning script
 ├── dataset_train.py         # Dataset loading and conversion
@@ -140,3 +179,4 @@ fine-tune-intent/
     ├── data_raw.csv         # Raw data from scraping
     └── lableling_data.py    # Automatic labeling script using Gemini API
 ```
+
