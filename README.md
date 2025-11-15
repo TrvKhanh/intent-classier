@@ -17,14 +17,15 @@ The model is fine-tuned from **Google FLAN-T5-small (77M parameters)** using **L
 
 The dataset is stored in JSON format as follows:
 
-```json
+json
 {
   "input": "Bên mình có bán poco x7 pro k ạ",
   "output": {
     "router": "retrieval-phone",
     "infor": "poco x7 pro"
   }
-}```
+}
+
 ### 2. Data Processing Pipeline
 
 #### Step 1: Data Collection and Labeling
@@ -64,7 +65,7 @@ The dataset is stored in JSON format as follows:
 # Output for model
 input_text: "classify: bên mình có bán poco x7 pro không ạ"
 target_text: '{"router": "retrieval-phone", "infor": "poco x7 pro"}'
-```
+
 
 ### 3. Data Statistics
 
