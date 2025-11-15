@@ -24,8 +24,7 @@ The dataset is stored in JSON format as follows:
     "router": "retrieval-phone",
     "infor": "poco x7 pro"
   }
-}
-
+}```
 ### 2. Data Processing Pipeline
 
 #### Step 1: Data Collection and Labeling
