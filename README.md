@@ -12,7 +12,7 @@ The model is fine-tuned from **Google FLAN-T5-small (77M parameters)** using **L
 # Input
 "Tôi muốn mua một chiêc iphone 16 promax shop tư vấn cho tôi đi."
 # Output for model
-'{"router": "retrieval-phone", "infor": "poco x7 pro"}'
+'{"router": "retrieval-phone", "infor": "thông tin iphone 16 promax"}'
 ```
 ---
 
